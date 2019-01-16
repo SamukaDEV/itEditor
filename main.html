@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>itEditor</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./css/icomoon/styles.css">
+  <style type="text/css" media="screen">
+    @font-face {
+      font-family: 'Roboto';
+      src: url('./fonts/Roboto-Regular.ttf')  format('truetype');
+    }
+    body {
+        overflow: hidden;
+        font-family: 'Roboto', sans-serif;
+        background: #272822;
+        /*  DISABLE SELECTIONS  */
+       -webkit-touch-callout: none;
+       -webkit-user-select: none;
+       -khtml-user-select: none;
+       -moz-user-select: none;
+       -ms-user-select: none;
+       user-select: none;
+    }
+
+    #editor {
+        padding-top: 5px;
+        margin: 0;
+        position: absolute;
+        top: 30px;
+        bottom: 20px;
+        left: 220px;
+        right: 0;
+    }
+
+    ul.TopMenu {
+        cursor: default;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background: #6d6e6a;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        height: 29px;
+        border-bottom: 1px solid black;
+    }
+    ul.TopMenu li.item {
+        display: inline-block;
+        margin: 0px;
+        padding: 5px;
+        color: white;
+        min-width: 100px;
+        text-align: center;
+        float: left;
+        /*background: black;*/
+    }
+    /*ul.TopMenu li.file div.backTile{
+        transform: perspective(5px) rotateX(1.5deg) translateZ(-0px);
+        background: black;
+        height: 30px;
+        width: 100%;
+        position: relative;
+    }*/
+    ul.TopMenu li.separator{
+        width: 20px;
+        height: 20px;
+        float: left;
+        /*background: red;*/
+    }
+    ul.TopMenu li.file{
+        display: inline-block;
+        margin: 0px;
+        padding: 5px;
+        color: white;
+        min-width: 100px;
+        text-align: center;
+        float: left;
+        width: 175px;
+        /*margin-right: 53px;*/
+    }
+    ul.TopMenu li.file .icon-cross3{
+        float: right;
+        top: 2px;
+        font-size: 15px;
+        padding: 4px;
+        border-radius: 3px;
+        color: gray;
+    }
+    ul.TopMenu li.file .icon-cross3:hover{
+        color: #bfbfbf;
+    }
+    ul.TopMenu li.file div.Tile{
+        background: #41423d;
+        float: left;
+        position: absolute;
+        width: 170px;
+        height: 17px;
+        padding: 5px;
+        transform: perspective(5px) rotateX(1.5deg) translateZ(-0px);
+        top: 2px;
+        border-radius: 3px 3px 0px 0px;
+        border-left: 1px solid #373737;
+    }
+    ul.TopMenu li.file div.Tile.active{
+        background: black;
+        /*z-index: 30;*/
+    }
+    ul.TopMenu li.file div.label{
+        float: left;
+        position: absolute;
+        width: 140px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-left: 15px;
+        padding-top: 5px;
+        font-size: 12px;
+        text-align: left;
+        color: #9d9a9a;
+    }
+    ul.TopMenu li.item:hover{
+        background: black;
+    }
+    ul.TopMenu li a {
+        display: block;
+        width: 60px;
+    }
+
+    .Footer{
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        height: 20px;
+        color: black;
+        font-size: 12px;
+        background: gray;
+        letter-spacing: 1px;
+    }
+    .Footer .item{
+        padding: 4px;
+        display: inline-block;
+    }
+
+    .LeftMenu{
+        cursor: default;
+        background: lightgray;
+        position: absolute;
+        left: 0px;
+        top: 30px;
+        width: 220px;
+        bottom: 0px;
+        padding-top: 20px;
+        padding-left: 0px;
+    }
+    .LeftMenu .item-title{
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #5b5b5b;
+        text-transform: uppercase;
+        padding-left: 20px;
+    }
+    .LeftMenu .item{
+        font-size: 14px;
+        padding-left: 30px;
+        padding-bottom: 3px;
+        padding-top: 3px;
+    }
+    .LeftMenu .item:hover{
+        background: #c2c2c2;
+    }
+
+    /* SCROLLBARS STYLE */
+    ::-webkit-scrollbar-track {
+        background-color: #3c3e35;
+    }
+    ::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+        background: orange;
+    }
+    ::-webkit-scrollbar-thumb {
+        border-left: 1px solid gray;
+        background: gray;
+        border-radius: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+<ul class="TopMenu">
+    <li class="item" onclick="save();">Save</li>
+    <li class="item" onclick="load();">Open</li>
+    <li class="item" onclick="">Search</li>
+    <li class="item" onclick="">Settings</li>
+
+    <li class="separator"></li>
+    
+    <li class="file">
+        <div class="Tile active"></div>
+        <div class="label">Label bem grande</div>
+        <i class="icon-cross3"></i>
+    </li>
+    <li class="file">
+        <div class="Tile"></div>
+        <div class="label">Label bem grande</div>
+        <i class="icon-cross3"></i>
+    </li>
+    <li class="file">
+        <div class="Tile"></div>
+        <div class="label">Label bem grande grande mesmo</div>
+        <i class="icon-cross3"></i>
+    </li>
+</ul>
+
+<div class="LeftMenu">
+    <div class="item-title">Current Files</div>
+    <div class="item">File 1</div>
+    <div class="item">File 2</div>
+    <div class="item">File 3</div>
+</div>
+
+<pre id="editor"></pre>
+
+<div class="Footer">
+    <div class="item" id="curPos">Line </div>
+    <!-- <div class="item" id="ll"></div> -->
+</div>
+
+<!-- load ace -->
+<script src="./js/ace/ace.js"></script>
+<script src="./js/ace/ext-statusbar.js"></script>
+<!-- load ace accessibility extension -->
+<!-- <script src="../src/ext-chromevox.js"></script> -->
+<script>
+
+    // trigger extension
+    // ace.require("ace/ext/chromevox");
+
+    var EditSession = ace.require('ace/edit_session').EditSession;
+    var StatusBar = ace.require('ace/ext/statusbar').StatusBar;
+
+    var editor = ace.edit("editor");
+    var statusbar = new StatusBar(editor, document.getElementById('curPos'));
+
+    editor.session.setMode("ace/mode/rhtml");
+
+    editor.setTheme("ace/theme/monokai");
+    editor.setFontSize(11.5);
+
+    let sess = new EditSession("Some js code");
+    sess.setMode('ace/mode/html');
+
+
+    function save(){
+        localStorage.setItem('CONTENT', editor.getValue());
+    }
+    function load(){
+        editor.setValue(localStorage.getItem('CONTENT'));
+        editor.moveCursorTo(0,0);
+    }
+
+    //
+    document.addEventListener("DOMContentLoaded", function(event) {
+        // - Code to execute when all DOM content is loaded.
+        // - including fonts, images, etc.
+        if('CONTENT' in localStorage){
+            load();
+        }
+    });
+
+
+</script>
+
+<!-- <script src="./show_own_source.js"></script> -->
+</body>
+</html>
